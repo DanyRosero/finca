@@ -8,6 +8,7 @@ use app\models\Search\TrabajoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use app\models\Empleado;
 
 /**
  * TrabajoController implements the CRUD actions for Trabajo model.
@@ -61,12 +62,14 @@ class TrabajoController extends Controller
     public function actionCreate()
     {
         $model = new Trabajo();
+        $trabajoEmpleados = Empleado::find()->all();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'trabajoEmpleados' => $trabajoEmpleados,
             ]);
         }
     }
@@ -80,12 +83,23 @@ class TrabajoController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+        $trabajoEmpleado = Empleado::find()->all();
+        
+        $model->empleado = \yii\helpers\ArrayHelper::getColumn(
+                $model->getTrabajoEmpleado()->asArray()->all(), 'id_empleado'
+        );
+        
+        if ($model->load(Yii::$app->request->post())) {
+            if (!isset($_POST['Trabajo']['empleado'])) {
+                $model->empleado = [];
+            }
+            if ($model->save()) {
+                return $this->redirect(['view', 'id' => $model->id]);
+            }
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'trabajoEmpleado' => $trabajoEmpleado
             ]);
         }
     }

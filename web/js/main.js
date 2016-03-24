@@ -11,3 +11,11 @@ $(function(){
                 .load($(this).attr('value'));
     });
 });
+
+$(function(){
+    $('#eub').click(function (){
+        $('#eum').modal('show')
+                .find('#euc')
+                .load($(this).attr('value'));
+    });
+});

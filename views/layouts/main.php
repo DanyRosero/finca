@@ -52,13 +52,14 @@ AppAsset::register($this);
             ];
         $menuItems[] = ['label' => 'Ventas',
             'items' => [
-                ['label' => 'Quesos', 'url' => ['/entrega-queso/index']],
+                ['label' => 'Quesos', 'url' => ['/entregaqueso/index']],
                 ['label' => 'Ganado', 'url' => ['/ventaganado/index']],
             ],
             ];
         $menuItems[] = ['label' => 'Potreros', 'url' => ['/ubicacion/index']];
+        $menuItems[] = ['label' => 'Trabajos', 'url' => ['/trabajo/index']];
         $menuItems[] = [
-            'label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+            'label' => 'Salir  [' . Yii::$app->user->identity->username. ']' ,
             'url' => ['/site/logout'],
             'linkOptions' => ['data-method' => 'post']
         ];

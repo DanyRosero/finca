@@ -36,7 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
         'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+        //    ['class' => 'yii\grid\SerialColumn'],
 
             'ci',
             'nombre',
@@ -45,7 +45,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'fecha_contrato',
             'salario',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            ['class' => 'yii\grid\ActionColumn', 'template' => '{view}{delete}'],
         ],
     ]); ?>
 

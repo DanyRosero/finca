@@ -11,7 +11,11 @@ use kartik\date\DatePicker;
 
 <div class="empleado-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin([
+      //  'method' => 'POST',
+      //  'enableClientValidation' => TRUE,
+        'enableAjaxValidation' => TRUE,
+    ]); ?>
 
     <?= $form->field($model, 'ci')->textInput(['maxlength' => true, 'placeholder' => 'Ingrese cedula de identidad']) ?>
 

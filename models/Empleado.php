@@ -31,11 +31,15 @@ class Empleado extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['ci', 'nombre', 'apellidos', 'fecha_nacimiento', 'fecha_contrato', 'salario'], 'required'],
+            [['ci', 'nombre', 'apellidos', 'fecha_nacimiento', 'fecha_contrato', 'salario'], 'required', 'message' => 'Campo requerido'],
+            [['ci'], 'valCedula'],
+            [['nombre'], 'valNombre'],
+            [['apellidos'], 'valApe'],
             [['fecha_nacimiento', 'fecha_contrato'], 'safe'],
             [['fecha_nacimiento'], 'validarNacimiento'],
-            [['fecha_ingreso'], 'validarIngreso'],
-            [['salario'], 'number'],
+            [['fecha_contrato'], 'validarIngreso'],
+            [['salario'], 'number', 'message' => 'Debe ingresar un valor numerico'],
+            [['salario'], 'validarSalario'],
             [['ci'], 'string', 'max' => 10],
             [['nombre'], 'string', 'max' => 30],
             [['apellidos'], 'string', 'max' => 40]
@@ -67,9 +71,41 @@ class Empleado extends \yii\db\ActiveRecord
         }
     }
     
+    public function valNombre($nam){
+        if (!$this->hasErrors()) {
+            if (!ereg("^[a-zA-Z]{3,30}$", $this->nombre)){
+                $this->addError($nam, 'Ingrese nombre valido');
+            }
+        }
+    }
+    
+    public function valApe($ape){
+        if (!$this->hasErrors()) {
+            if (!ereg("^[a-zA-Z ]{3,30}$", $this->apellidos)){
+                $this->addError($ape, 'Ingrese apellidos validos');
+            }
+        }
+    }
+    
+    public function valCedula($ced){
+        if (!$this->hasErrors()) {
+            if (!ereg("^[0-9]{10,10}$", $this->ci)){
+                $this->addError($ced, 'Ingrese una cedula correcta');
+            }
+        }
+    }
+
+    public function validarSalario($sal) {
+        if (!$this->hasErrors()) {
+            if ((float)$this->salario < 0) {
+                $this->addError($sal, 'No se permiten valores negativos');
+            }
+        }
+    }
+
     public function validarIngreso($aux) {
         if (!$this->hasErrors()) {
-            $date = $this->fecha_ingreso;
+            $date = $this->fecha_contrato;
             if ($date > date('Y-m-d') || $date < $this->fecha_nacimiento+18) {
                 $this->addError($aux, 'Selecicone una fecha correcta.');
             }

@@ -59,8 +59,8 @@ class Bovinos extends \yii\db\ActiveRecord
             'nacimiento' => Yii::t('app', 'Nacimiento'),
             'raza' => Yii::t('app', 'Raza'),
             'cachos_detalle' => Yii::t('app', 'Cachos Detalle'),
-            'id_madre' => Yii::t('app', 'Id Madre'),
-            'id_grupo' => Yii::t('app', 'Id Grupo'),
+            'id_madre' => Yii::t('app', 'Madre'),
+            'id_grupo' => Yii::t('app', 'Grupo'),
         ];
     }
 

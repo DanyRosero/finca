@@ -18,7 +18,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'celular')->textInput(['maxlength' => true, 'placeholder' => 'Ingrese telefono celular']) ?>
 
-    <?= $form->field($model, 'producto')->textInput(['maxlength' => true, 'placeholder' => 'Describa el producto que compra']) ?>
+    <?= $form->field($model, 'producto')->dropDownList(array('Ganado Vacuno' => 'Ganado Vacuno', 'Queso' => 'Queso', 'Leche' => 'Leche', 'Ganado Equino' => 'Ganado Equino', 'Citricos' => 'Citricos'), ['prompt' => '--Seleccione Producto--']) ?>
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Crear') : Yii::t('app', 'Actualizar'), ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
