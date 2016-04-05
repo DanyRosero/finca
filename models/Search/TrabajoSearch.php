@@ -20,7 +20,6 @@ class TrabajoSearch extends Trabajo
         return [
             [['id', 'duracion_dias', 'id_ubicacion'], 'integer'],
             [['tipo', 'fecha_inicio', 'fecha_fin'], 'safe'],
-            [['costo'], 'number'],
         ];
     }
 
@@ -59,7 +58,6 @@ class TrabajoSearch extends Trabajo
         $query->andFilterWhere([
             'id' => $this->id,
             'duracion_dias' => $this->duracion_dias,
-            'costo' => $this->costo,
             'fecha_inicio' => $this->fecha_inicio,
             'fecha_fin' => $this->fecha_fin,
             'id_ubicacion' => $this->id_ubicacion,

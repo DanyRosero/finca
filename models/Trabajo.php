@@ -12,9 +12,9 @@ use app\models\TrabajoEmpleado;
  * @property integer $id
  * @property string $tipo
  * @property integer $duracion_dias
- * @property double $costo
  * @property string $fecha_inicio
  * @property string $fecha_fin
+ * @property double $coste
  * @property integer $id_ubicacion
  *
  * @property Ubicacion $idUbicacion
@@ -36,11 +36,10 @@ class Trabajo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['tipo', 'duracion_dias', 'costo', 'fecha_inicio', 'fecha_fin', 'id_ubicacion'], 'required'],
+            [['tipo', 'duracion_dias', 'fecha_inicio', 'fecha_fin', 'id_ubicacion'], 'required'],
             [['duracion_dias', 'id_ubicacion'], 'integer'],
-            [['costo'], 'number'],
             [['duracion_dias'], 'validarDias'],
-            [['costo'], 'validarCosto'],
+            [['coste'], 'number'],
             [['fecha_inicio', 'fecha_fin', 'empleado'], 'safe'],
             [['tipo'], 'string', 'max' => 30]
         ];
@@ -55,11 +54,11 @@ class Trabajo extends \yii\db\ActiveRecord
             'id' => Yii::t('app', 'ID'),
             'tipo' => Yii::t('app', 'Tipo'),
             'duracion_dias' => Yii::t('app', 'Duracion - Dias'),
-            'costo' => Yii::t('app', 'Costo'),
             'fecha_inicio' => Yii::t('app', 'Fecha Inicio'),
             'fecha_fin' => Yii::t('app', 'Fecha Fin'),
             'id_ubicacion' => Yii::t('app', 'Ubicacion'),
             'empleado' => \Yii::t('app', 'Empleados'),
+            'coste' => \Yii::t('app', 'Coste')
         ];
     }
 
@@ -82,10 +81,10 @@ class Trabajo extends \yii\db\ActiveRecord
         } else {
             /* aqui en el isset se comprueba de que la accion del formulario del modal, osea el guardar se haya presionado*/
             if (isset($_POST['guardar'])) {
-                \Yii::$app->db->createCommand()->delete('trabajo_empleado', 'id_trabajo = ' . (int) $this->id.' and ci_empleado = '.(int)$_POST['ci'])->execute();
+                \Yii::$app->db->createCommand()->delete('trabajo_empleado', 'id_trabajo = ' . (int) $this->id.' and ci_empleado = '.(int)$_POST['ci_empleado'])->execute();
                 $ro = new TrabajoEmpleado();
                 $ro->id_trabajo = $this->id;
-                $ro->ci_empleado = $_POST['ci']; // este ci se recibe del modal
+                $ro->ci_empleado = $_POST['ci_empleado']; // este ci se recibe del modal
                 $ro->pago = $_POST['pago'];// este pago se reciba del modal
                 $ro->save();
             }
@@ -116,13 +115,6 @@ class Trabajo extends \yii\db\ActiveRecord
         return $this->getCiEmpleado()->asArray();
     }
     
-    public function validarCosto($cst) {
-        if (!$this->hasErrors()) {
-            if ((float)$this->costo < 0) {
-                $this->addError($cst, 'El costo no puede ser negativo');
-            }
-        }
-    }
     
     public function validarDias($di) {
         if (!$this->hasErrors()) {

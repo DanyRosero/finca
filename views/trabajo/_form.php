@@ -36,8 +36,6 @@ date_default_timezone_set('America/Guayaquil');
 
     <?= $form->field($model, 'duracion_dias')->textInput(['placeholder' => 'Ingrese el total de dias del trabajo']) ?>
 
-    <?= $form->field($model, 'costo')->textInput(['placeholder' => 'Ingrese costo del trabajo']) ?>
-
     <?php
     echo '<label class="control-label">Seleccione laxo de tiempo</label>';
     echo DatePicker::widget([

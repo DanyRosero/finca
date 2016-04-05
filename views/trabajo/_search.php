@@ -21,8 +21,6 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'duracion_dias') ?>
 
-    <?= $form->field($model, 'costo') ?>
-
     <?= $form->field($model, 'fecha_inicio') ?>
 
     <?php // echo $form->field($model, 'fecha_fin') ?>
@@ -30,8 +28,8 @@ use yii\widgets\ActiveForm;
     <?php // echo $form->field($model, 'id_ubicacion') ?>
 
     <div class="form-group">
-        <?= Html::submitButton(Yii::t('app', 'Search'), ['class' => 'btn btn-primary']) ?>
-        <?= Html::resetButton(Yii::t('app', 'Reset'), ['class' => 'btn btn-default']) ?>
+        <?= Html::submitButton(Yii::t('app', 'Buscar'), ['class' => 'btn btn-primary']) ?>
+        <?= Html::resetButton(Yii::t('app', 'Limpiar'), ['class' => 'btn btn-default']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

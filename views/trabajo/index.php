@@ -19,7 +19,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
     <p>
-        <?= Html::a(Yii::t('app', 'Create Trabajo'), ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a(Yii::t('app', 'Ingresar Trabajo'), ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([
@@ -31,7 +31,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'id',
             'tipo',
             //'duracion_dias',
-            'costo',
             'fecha_inicio',
             'fecha_fin',
              

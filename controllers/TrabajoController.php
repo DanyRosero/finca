@@ -129,7 +129,7 @@ class TrabajoController extends Controller
         if (($model = Trabajo::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('Este registro no existe.');
         }
     }
 }

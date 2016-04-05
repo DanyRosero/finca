@@ -29,7 +29,7 @@ class TrabajoEmpleado extends \yii\db\ActiveRecord
         return [
             [['id_trabajo', 'ci_empleado', 'pago'], 'required'],
             [['id_trabajo', 'ci_empleado'], 'integer'],
-            [['pago'], 'number']
+            //[['pago'], 'number']
         ];
     }
 
